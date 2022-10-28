@@ -2,7 +2,7 @@
             <div class="card-body">
                 <div class="post-title d-flex justify-content-between bg-dark text-white p-2">
                 <h4>{{post.title}}</h4>
-                <h4>Poste by {{post.user.username}} on {{post.created_at}}</h4>
+                <h4>Poste by {{post.user.username}} on {{format_date post.created_at}}</h4>
             </div>
                 <p class="card-text">{{post.description}}</p>            
             </div>
@@ -16,7 +16,7 @@
 
   <div>
     <button class="bg-dark text-white" type="submit">Add comment</button>
-
+    
   </div>
 </form>
 {{/if}}
@@ -25,7 +25,7 @@
     {{#each post.comments}}
     <section class="comment">
         <div class="meta">
-            {{user.username}} on {{created_at}}
+            {{user.username}} on {{format_date created_at}}
         </div>
         <div class="text">
             {{comment_text}}

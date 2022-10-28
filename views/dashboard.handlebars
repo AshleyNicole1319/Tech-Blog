@@ -1,36 +1,37 @@
 <section class="container d-flex justify-content-around mt-5">
-
+  
 
   <form class="new-post-form d-flex flex-column">
     <h2>Create New Post</h2>
       <label for="post-title">Title</label>
       <input type="text" id="post-title" name="post-title" />
-
-
+    
+    
       <label for="post-description">Description</label>
       <input id="post-description" name="post-description" />
-
+    
     <button type="submit" class="btn bg-dark text-white mt-3">Create</button>
   </form>
 </section>
-<script src="/javascript/add-post.js"></script>
+
 
 {{#each posts as |post|}}
 <div class="card-body mt-5">
                 <div class="post-title d-flex justify-content-between bg-dark p-2">
                 <h4>{{post.title}}</h4>
-                <h4>Posted by {{post.user.username}} on {{post.created_at}}</h4>
+                <h4>Posted by {{post.user.username}} on {{format_date post.created_at}}</h4>
                 </div>
-
+                
                 <p class="card-text">{{post.description}}</p>            
-
-
+                
+                
             <a href="/post/{{post.id}}">{{post.comments.length}} comment(s)</a>
-            <div>
-                <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-            </div>
+
+          <div><a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a></div>
+
+            
+
 </div>
 {{/each}}
-
 
 <script src="/javascript/add-post.js"></script>

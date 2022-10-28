@@ -1,0 +1,14 @@
+{{#each posts as |post|}}
+<div class="card-body mt-5">
+                <div class="post-title d-flex justify-content-between bg-dark p-2">
+                <h4>{{post.title}}</h4>
+                <h4>Posted by {{post.user.username}} on {{format_date post.created_at}}</h4>
+                </div>
+                <div class="bg-light">
+                <p class="card-text">{{post.description}}</p>            
+                
+                
+            <a href="/post/{{post.id}}">{{post.comments.length}} comment(s)</a>
+            </div>
+</div>
+{{/each}}
