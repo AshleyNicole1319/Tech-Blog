@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User} = require('../../models');
+const { Post, User, Comment} = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
@@ -11,10 +11,17 @@ router.get('/', (req, res) => {
         model: User,
         attributes: ['username']
       },
-
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
     ]
   })
-    .then(postData => res.json(postData))
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -34,8 +41,8 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-    .then(postData => {
-      if (!postData) {
+    .then(dbPostData => {
+      if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
@@ -54,7 +61,7 @@ router.post('/', (req, res) => {
     description: req.body.description,
     user_id: req.body.user_id
   })
-    .then(postData => res.json(postData))
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -72,12 +79,12 @@ router.put('/:id', (req, res) => {
       }
     }
   )
-    .then(postData => {
-      if (!postData) {
+    .then(dbPostData => {
+      if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(postData);
+      res.json(dbPostData);
     })
     .catch(err => {
       console.log(err);
@@ -91,12 +98,12 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-    .then(postData => {
-      if (!postData) {
+    .then(dbPostData => {
+      if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(postData);
+      res.json(dbPostData);
     })
     .catch(err => {
       console.log(err);
