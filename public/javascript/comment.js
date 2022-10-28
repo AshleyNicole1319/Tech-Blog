@@ -10,7 +10,7 @@ async function addComment(event) {
         const response = await fetch('/api/comments', {
             method: 'POST',
             body: JSON.stringify({
-
+                
                 post_id,
                 comment_text
             }),

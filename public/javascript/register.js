@@ -3,7 +3,7 @@ async function signupFormHandler(event) {
   const username = document.querySelector('#user-signup').value;
   const email = document.querySelector('#email-signup').value;
   const password = document.querySelector('#pw-signup').value;
-
+  
   if (username && email && password) {
     const response = await fetch('/api/users', {
         method: 'post',
@@ -19,7 +19,7 @@ async function signupFormHandler(event) {
     if(response.ok){
         document.location.replace('/dashboard');
     } else { alert(response.statusText)}
-
+   
   }
 
   }
