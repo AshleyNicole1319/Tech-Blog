@@ -35,6 +35,7 @@ Once signed up, you can create posts and comment on other user's posts.
 * Sequeilize
 
 ## Deployment Link:
+https://secure-journey-05303.herokuapp.com/
 
 ## Contributing:
 Ashley Warford
