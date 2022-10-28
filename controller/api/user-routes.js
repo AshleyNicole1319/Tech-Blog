@@ -22,7 +22,8 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ['id', 'title', 'description', 'created_at']
+        attributes: ['id', 'title', 'description', 'created_at'
+      ]
       }
     ]
   })
@@ -40,21 +41,22 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
+  
   User.create({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password
   })
-  .then(userData => {
-    req.session.save(() => {
-      req.session.user_id=userData.id;
-      req.session.username=userData.username;
-      req.session.loggedIn=true;
+    .then(userData => {
+      req.session.save(() => {
+        req.session.user_id=userData.id;
+        req.session.username=userData.username;
+        req.session.loggedIn=true;
 
-      res.json(userData)
-    });
-  })
+        res.json(userData)
+      });
+    })
+      
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -62,7 +64,7 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-
+  
   User.findOne({
     where: {
       email: req.body.email
@@ -101,6 +103,7 @@ router.post('/logout', (req, res) => {
   }
 })
 router.put('/:id', (req, res) => {
+ 
 
   // pass in req.body instead to only update what's passed through
   User.update(req.body, {
@@ -141,5 +144,6 @@ router.delete('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+
 
 module.exports = router;

@@ -23,12 +23,12 @@ router.get('/', (req, res) => {
                 attributes: ['username']
             }
         }
-
+        
       ]
     })
       .then(postData => {
         const posts = postData.map(post => post.get({plain: true}));
-
+       
         res.render('homepage', {
           posts,
           loggedIn: req.session.loggedIn
@@ -37,10 +37,11 @@ router.get('/', (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
+        
       });
   });
 
-
+  
   router.get('/post/:id', (req, res) => {
     Post.findOne({
       where: {
@@ -72,8 +73,8 @@ router.get('/', (req, res) => {
           res.status(404).json({ message: 'No post found with this id' });
           return;
         }
-
-
+  
+        
         const post = postData.get({ plain: true });
         res.render('single-post', {
           post,
@@ -88,15 +89,16 @@ router.get('/', (req, res) => {
   router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
       res.redirect('/');
-      return;
-    }
-
-    res.render('login');
+     return;
+   }
+  
+   res.render('login');
   });
-
+ 
+  
   router.get('/register', (req, res) =>{
     res.render('register')
   });
-
-
+  
+     
 module.exports = router;

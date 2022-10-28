@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
         model: User,
         attributes: ['username']
       }
+      
     ]
   })
     .then(dbPostData => res.json(dbPostData))
@@ -55,7 +56,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(postData);
+      res.json(dbPostData);
     })
     .catch(err => {
       console.log(err);
@@ -63,8 +64,8 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', withAuth, (req, res) => {
-
+router.post('/',withAuth, (req, res) => {
+ 
   Post.create({
     title: req.body.title,
     description: req.body.description,
@@ -77,10 +78,11 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id',withAuth, (req, res) => {
   Post.update(
     {
-      title: req.body.title
+      title: req.body.title,
+      description: req.body.description
     },
     {
       where: {
@@ -101,7 +103,8 @@ router.put('/:id', withAuth, (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
+  console.log(req.params.id)
   Post.destroy({
     where: {
       id: req.params.id
