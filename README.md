@@ -16,9 +16,9 @@ This application a blog for developers to discuss technical concepts.
 Once signed up, you can create posts and comment on other user's posts.
 
 
-![Homepage](./public/images/homepage.jpg)
+![Dashboard](./public/images/dashboard.jpg)
 
-![Dashboard Page](./public/images/dashboard.jpg)
+![Login Page](./public/images/login.png)
 
 
 ## Installation
