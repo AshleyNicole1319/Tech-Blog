@@ -21,3 +21,7 @@ header{
 .post-title{
     color:rgb(36, 100, 87);
 }
+
+#logout{
+    border: 0;
+}

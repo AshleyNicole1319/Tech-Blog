@@ -26,7 +26,11 @@
 
 
             <a href="/post/{{post.id}}">{{post.comments.length}} comment(s)</a>
+            <div>
+                <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+            </div>
 </div>
 {{/each}}
 
 
+<script src="/javascript/add-post.js"></script>
